@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sanmed.modelviewintent.R
 import com.sanmed.modelviewintent.presentation.ui.DiceBox
 import com.sanmed.modelviewintent.presentation.ui.InformationBox
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setContent {
             MVIAppTheme {
                 renderState(viewModel.state)
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun renderState(state: MainState) {
         when (state) {
-            is MainState.DiceResult -> ShowDiceResult(state.result)
-            is MainState.Error -> ShowDiceError(state.error)
             MainState.Idle -> ShowIdle()
             MainState.Loading -> ShowLoading()
+            is MainState.DiceResult -> ShowDiceResult(state.result)
+            is MainState.Error -> ShowDiceError(state.error)
         }
     }
 
